@@ -1,5 +1,9 @@
 package webstore;
 
+import spark.Request;
+import spark.Response;
+import spark.Route;
+
 import static spark.Spark.*;
 import static spark.SparkBase.port;
 
@@ -18,12 +22,16 @@ public class Main {
             return converter.toJson(hasSessionResponse);
         });
         post("/login", (request, response) -> {
-            LoginResponse loginResponse = new LoginResponse();
             LoginRequest loginRequest = converter.fromJson(request.body(), LoginRequest.class);
+
+
+
+            LoginResponse loginResponse = new LoginResponse();
             loginResponse.success = !loginRequest.email.isEmpty() && !loginRequest.password.isEmpty();
             if (loginResponse.success)
                 response.cookie("session", SESSION_ID);
             loginResponse.message = "Invalid e-mail/password";
+
             return converter.toJson(loginResponse);
         });
         post("/logout", (request, response) -> {
