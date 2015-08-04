@@ -5,12 +5,15 @@ package webstore.usecases;
  */
 public class LoginUseCase
 {
+    private final UserRepository userRepository;
+    private final Receiver receiver;
     private String email;
     private String password;
 
-    public LoginUseCase(Repository repository)
+    public LoginUseCase(UserRepository userRepository, Receiver receiver)
     {
-
+        this.userRepository = userRepository;
+        this.receiver = receiver;
     }
 
     public void setEmail(String email)
@@ -25,11 +28,20 @@ public class LoginUseCase
 
     public void login()
     {
-
+        try {
+            User user = userRepository.getUserByEmail(this.email);
+            testsIfPasswordIsValid(user);
+        } catch (UserRepository.UserDoesNotExist e) {
+            receiver.sendErrorUserDoesNotExist();
+        }
     }
 
-    public boolean wasSuccessful()
+    private void testsIfPasswordIsValid(User user)
     {
-        return true;
+        if (user.getPassword().equals(this.password)) {
+            receiver.sendSuccess();
+        } else {
+            receiver.sendErrorPasswordIsWrong();
+        }
     }
 }

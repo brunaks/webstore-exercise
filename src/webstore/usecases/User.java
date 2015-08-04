@@ -3,8 +3,7 @@ package webstore.usecases;
 /**
  * Created by I848075 on 03/08/2015.
  */
-public class User
-{
+public class User {
 
     private String id;
     private String email;
