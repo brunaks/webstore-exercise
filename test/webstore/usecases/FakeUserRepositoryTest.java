@@ -42,7 +42,12 @@ public class FakeUserRepositoryTest {
     }
 
     @Test
-    public void savedUserIsNotTheSame() {
+    public void afterSavingACustomerModificationsShouldNotBeReflected() {
+        User user = givenUser("email@email.com.br", "password");
+        User savedUser = userRepository.save(user);
 
+        user.setPassword("password2");
+        User retrievedUser = userRepository.getUserByEmail("email@email.com.br");
+        Assert.assertEquals("password", retrievedUser.getPassword());
     }
 }

@@ -17,9 +17,12 @@ public class FakeUserRepository implements UserRepository {
 
     @Override
     public User save(User user) {
-        user.setId(this.generateUUID());
-        this.users.add(user);
-        return user;
+        User savedUser = new User();
+        savedUser.setEmail(user.getEmail());
+        savedUser.setPassword(user.getPassword());
+        savedUser.setId(this.generateUUID());
+        this.users.add(savedUser);
+        return savedUser;
     }
 
     @Override
