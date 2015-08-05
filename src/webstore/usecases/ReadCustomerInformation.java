@@ -36,7 +36,7 @@ public class ReadCustomerInformation {
         try {
             this.customer = customerRepository.getCustomerById(this.customerId);
             return true;
-        }catch (CustomerRepository.CustomerNotFound e){
+        } catch (CustomerRepository.CustomerNotFound e) {
             return false;
         }
     }

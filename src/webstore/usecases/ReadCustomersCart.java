@@ -15,7 +15,7 @@ public class ReadCustomersCart {
 
     public void setCustomer(String customerId) {
         this.customerId = customerId;
-        if (!customerIsInRepository()){
+        if (!customerIsInRepository()) {
             sendErrorThatCustomerWasNotFound();
         }
     }
@@ -32,7 +32,7 @@ public class ReadCustomersCart {
         try {
             this.customer = customerRepository.getCustomerById(this.customerId);
             return true;
-        }catch (CustomerRepository.CustomerNotFound e){
+        } catch (CustomerRepository.CustomerNotFound e) {
             return false;
         }
     }

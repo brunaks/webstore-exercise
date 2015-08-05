@@ -25,7 +25,6 @@ public class Main {
             LoginRequest loginRequest = converter.fromJson(request.body(), LoginRequest.class);
 
 
-
             LoginResponse loginResponse = new LoginResponse();
             loginResponse.success = !loginRequest.email.isEmpty() && !loginRequest.password.isEmpty();
             if (loginResponse.success)

@@ -14,24 +14,18 @@ public class AddProductToCart {
     private Customer customer;
     private Product product;
 
-    public AddProductToCart(ProductRepository productRepository, CustomerRepository customerRepository)
-    {
+    public AddProductToCart(ProductRepository productRepository, CustomerRepository customerRepository) {
         this.productRepository = productRepository;
         this.customerRepository = customerRepository;
     }
 
-    public boolean execute() {
-        return productIsAddedToCart();
-    }
-
-    private boolean productIsAddedToCart() {
+    public void execute() {
         try {
             customer.getCart().addItem(this.product, this.quantity);
             customerRepository.saveCustomer(customer);
-            return this.successful = true;
-        }
-        catch (CartItem.NotEnoughtStockForProduct e) {
-            return this.successful = false;
+            this.successful = true;
+        } catch (CartItem.NotEnoughStockForProduct e) {
+            this.successful = false;
         }
     }
 
@@ -48,7 +42,7 @@ public class AddProductToCart {
         try {
             this.customer = customerRepository.getCustomerById(this.customerId);
             return true;
-        }catch (CustomerRepository.CustomerNotFound e){
+        } catch (CustomerRepository.CustomerNotFound e) {
             return false;
         }
     }

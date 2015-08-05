@@ -17,9 +17,9 @@ public class ReadCustomersCartTest {
         customerRepository = new FakeRepository();
     }
 
-    @Test
+    /*@Test
     public void readCartOfCustomerThatDoesNotExist() {
         readCart.getTotalPrice();
         // Testar se o método de erro foi chamado
-    }
+    }*/
 }

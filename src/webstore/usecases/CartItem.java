@@ -53,11 +53,11 @@ public class CartItem {
 
     private void testProductStock(Product product, int quantity) {
         if (!product.hasInStock(quantity)) {
-            throw new NotEnoughtStockForProduct();
+            throw new NotEnoughStockForProduct();
         }
     }
 
-    public class NotEnoughtStockForProduct extends RuntimeException {
+    public class NotEnoughStockForProduct extends RuntimeException {
 
     }
 

@@ -9,8 +9,7 @@ public class Cart {
 
     private ArrayList<CartItem> items = new ArrayList<CartItem>();
 
-    public ArrayList<CartItem> getCartItems()
-    {
+    public ArrayList<CartItem> getCartItems() {
         return this.items;
     }
 
@@ -20,8 +19,7 @@ public class Cart {
 
     public double getTotalPrice() {
         int totalPrice = 0;
-        for (int i = 0; i < this.items.size(); i++)
-        {
+        for (int i = 0; i < this.items.size(); i++) {
             totalPrice += this.items.get(i).getTotalPrice();
         }
         return totalPrice;
@@ -33,22 +31,17 @@ public class Cart {
         this.items.add(item);
     }
 
-    private void isProductAlreadyInTheCart(Product product)
-    {
-        for (int i = 0; i < this.items.size(); i++)
-        {
-            if (this.items.get(i).getProduct() == product)
-            {
+    private void isProductAlreadyInTheCart(Product product) {
+        for (int i = 0; i < this.items.size(); i++) {
+            if (this.items.get(i).getProduct() == product) {
                 throw new ItemIsAlreadyInTheCart();
             }
         }
     }
 
     public void removeProduct(Product product) {
-        for (int i = 0; i < this.items.size(); i++)
-        {
-            if (this.items.get(i).getProduct() == product)
-            {
+        for (int i = 0; i < this.items.size(); i++) {
+            if (this.items.get(i).getProduct() == product) {
                 this.items.remove(i);
             }
         }

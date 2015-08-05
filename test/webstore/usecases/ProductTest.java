@@ -7,117 +7,100 @@ import org.junit.Test;
 /**
  * Created by I848075 on 09/07/2015.
  */
-public class ProductTest extends EntityTest
-{
+public class ProductTest extends EntityTest {
 
     private Product product;
 
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         product = new Product();
         super.setUp();
     }
 
     @Override
-    protected Entity getEntity()
-    {
+    protected Entity getEntity() {
         return product;
     }
 
     @Test
-    public void initialNameIsBlank()
-    {
+    public void initialNameIsBlank() {
         Assert.assertEquals("", product.getName());
     }
 
     @Test
-    public void nameCanBeChanged()
-    {
+    public void nameCanBeChanged() {
         product.setName("Banana");
         Assert.assertEquals("Banana", product.getName());
     }
 
     @Test
-    public void initialDescriptionIsBlank()
-    {
+    public void initialDescriptionIsBlank() {
 
         Assert.assertEquals("", product.getDescription());
     }
 
     @Test
-    public void descriptionCanBeChanged()
-    {
+    public void descriptionCanBeChanged() {
         product.setDescription("Fruta Amarela Sem Sementes");
         Assert.assertEquals("Fruta Amarela Sem Sementes", product.getDescription());
     }
 
     @Test
-    public void initialPriceIsZero()
-    {
+    public void initialPriceIsZero() {
 
         Assert.assertEquals(0, product.getPrice(), 0.001);
     }
 
     @Test
-    public void productPriceCanBeChanged()
-    {
+    public void productPriceCanBeChanged() {
         product.setPrice(3.00);
         Assert.assertEquals(3.00, product.getPrice(), 0.001);
     }
 
     @Test
-    public void initialStockIsZero()
-    {
+    public void initialStockIsZero() {
         Assert.assertEquals(false, product.hasInStock(10));
     }
 
     @Test
-    public void productUnitsCanBeAdded()
-    {
+    public void productUnitsCanBeAdded() {
         product.addUnits(10);
         Assert.assertTrue(product.hasInStock(10));
     }
 
     @Test
-    public void productUnitsCanBeRemoved()
-    {
+    public void productUnitsCanBeRemoved() {
         product.addUnits(20);
         product.removeUnits(10);
         Assert.assertTrue(product.hasInStock(10));
     }
 
     @Test
-    public void productUnitsCannotGoBelowZero()
-    {
+    public void productUnitsCannotGoBelowZero() {
         product.removeUnits(10);
         Assert.assertEquals(0, product.getStock());
     }
 
     @Test
-    public void hasInStockReturnsTrueIfParameterIsLessThanUnitsAdded()
-    {
+    public void hasInStockReturnsTrueIfParameterIsLessThanUnitsAdded() {
         product.addUnits(10);
         Assert.assertTrue(product.hasInStock(9));
     }
 
     @Test
-    public void hasInStockReturnsTrueIfParameterIsEqualToUnitsAdded()
-    {
+    public void hasInStockReturnsTrueIfParameterIsEqualToUnitsAdded() {
         product.addUnits(10);
         Assert.assertTrue(product.hasInStock(10));
     }
 
     @Test
-    public void hasInStockReturnsFalseIfParameterIsGreaterThanUnitsAdded()
-    {
+    public void hasInStockReturnsFalseIfParameterIsGreaterThanUnitsAdded() {
         product.addUnits(10);
         Assert.assertFalse(product.hasInStock(11));
     }
 
-    @Test (expected = Product.priceMustNotBeANegativeNumber.class)
-    public void productPriceCannotBeBelowZero()
-    {
+    @Test(expected = Product.priceMustNotBeANegativeNumber.class)
+    public void productPriceCannotBeBelowZero() {
         product.setPrice(-10.0);
     }
 }

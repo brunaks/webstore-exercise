@@ -3,9 +3,6 @@ package webstore.usecases;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import webstore.usecases.Cart;
-import webstore.usecases.CartItem;
-import webstore.usecases.Product;
 
 /**
  * Created by I848075 on 14/07/2015.
@@ -34,7 +31,7 @@ public class CartItemTest {
         Assert.assertEquals(10, cartItem.getQuantity());
     }
 
-    @Test(expected = CartItem.NotEnoughtStockForProduct.class)
+    @Test(expected = CartItem.NotEnoughStockForProduct.class)
     public void initialCartItemMustTestStockOfProduct() {
         CartItem cartItem = new CartItem(cart, product, 30);
     }
@@ -44,7 +41,7 @@ public class CartItemTest {
         CartItem cartItem = new CartItem(cart, product, 0);
     }
 
-    @Test (expected = CartItem.quantityShouldBeGreaterThanZero.class)
+    @Test(expected = CartItem.quantityShouldBeGreaterThanZero.class)
     public void initialCartItemQuantityCannotBeBelowZero() {
         CartItem cartItem = new CartItem(cart, product, -10);
     }
@@ -84,7 +81,7 @@ public class CartItemTest {
         Assert.assertEquals(0, cart.getCartItems().size());
     }
 
-    @Test(expected = CartItem.NotEnoughtStockForProduct.class)
+    @Test(expected = CartItem.NotEnoughStockForProduct.class)
     public void cartItemTestsProductStockBeforeAddingQuantity() {
         cartItem.addQuantity(10);
         cartItem.addQuantity(20);
@@ -97,27 +94,23 @@ public class CartItemTest {
     }
 
     @Test
-    public void cartItemCanReturnQuantity()
-    {
+    public void cartItemCanReturnQuantity() {
         Assert.assertEquals(10, cartItem.getQuantity());
     }
 
     @Test
-    public void cartItemRemovesProductUnitsWhenProductIsAddedToCart()
-    {
+    public void cartItemRemovesProductUnitsWhenProductIsAddedToCart() {
         Assert.assertEquals(10, product.getStock());
     }
 
     @Test
-    public void cartItemRemovesProductUnitsWhenQuantityIsAdded()
-    {
+    public void cartItemRemovesProductUnitsWhenQuantityIsAdded() {
         cartItem.addQuantity(4);
         Assert.assertEquals(6, product.getStock());
     }
 
     @Test
-    public void cartItemAddsProductUnitsWhenQuantityIsRemoved()
-    {
+    public void cartItemAddsProductUnitsWhenQuantityIsRemoved() {
         cartItem.removeQuantity(7);
         Assert.assertEquals(17, product.getStock());
     }

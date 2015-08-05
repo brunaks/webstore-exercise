@@ -8,8 +8,7 @@ import webstore.usecases.*;
 /**
  * Created by I848075 on 03/08/2015.
  */
-public class LoginUseCaseTest
-{
+public class LoginUseCaseTest {
 
     private LoginUseCase uc;
     private UserRepository userRepository;
@@ -17,16 +16,14 @@ public class LoginUseCaseTest
     private Receiver receiver;
 
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         userRepository = new FakeUserRepository();
         receiver = new FakeReceiver();
         uc = new LoginUseCase(userRepository, receiver);
     }
 
     @Test
-    public void loginSuccessful()
-    {
+    public void loginSuccessful() {
         registerUser = new RegisterUser(this.userRepository, this.receiver);
         registerUser.setEmail("email@yahoo.com.br");
         registerUser.setPassword("password");
@@ -42,8 +39,7 @@ public class LoginUseCaseTest
 
 
     @Test
-    public void loginNotSuccessful_userNotRegistered()
-    {
+    public void loginNotSuccessful_userNotRegistered() {
         String email = "email@yahoo.com.br";
         uc.setEmail(email);
         uc.setPassword(" password");
@@ -53,8 +49,7 @@ public class LoginUseCaseTest
     }
 
     @Test
-    public void loginNotSuccessful_passwordWrong()
-    {
+    public void loginNotSuccessful_passwordWrong() {
         registerUser = new RegisterUser(this.userRepository, this.receiver);
         registerUser.setEmail("email@yahoo.com.br");
         registerUser.setPassword("password");

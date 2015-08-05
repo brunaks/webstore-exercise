@@ -1,35 +1,54 @@
 package webstore.usecases;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by I848075 on 03/08/2015.
  */
-public class FakeUserRepository implements UserRepository
-{
+public class FakeUserRepository implements UserRepository {
 
     private ArrayList<User> users = new ArrayList<User>();
 
     @Override
-    public User getUserById(String userId)
-    {
+    public User getUserById(String userId) {
         throw new UserRepository.UserDoesNotExist();
     }
 
     @Override
-    public void saveUser(User user)
-    {
+    public User save(User user) {
+        user.setId(this.generateUUID());
         this.users.add(user);
+        return user;
     }
 
     @Override
-    public User getUserByEmail(String email)
-    {
+    public User getUserByEmail(String email) {
+        User match = findUserWithEmail(email);
+
+        if (match != null)
+            return match;
+        else
+            throw new UserRepository.UserDoesNotExist();
+    }
+
+    @Override
+    public boolean hasWithEmail(String email) {
+        return findUserWithEmail(email) != null;
+    }
+
+    private User findUserWithEmail(String email) {
+        User match = null;
         for (int i = 0; i < this.users.size(); i++) {
             if (this.users.get(i).getEmail().equalsIgnoreCase(email)) {
-                return this.users.get(i);
+                match = this.users.get(i);
             }
         }
-        throw new UserRepository.UserDoesNotExist();
+        return match;
+    }
+
+    private String generateUUID() {
+        String id = UUID.randomUUID().toString();
+        return id;
     }
 }

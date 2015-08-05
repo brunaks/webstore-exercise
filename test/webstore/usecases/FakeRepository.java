@@ -5,8 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Bruna Koch Schmitt on 02/08/2015.
  */
-class FakeRepository implements ProductRepository
-{
+class FakeRepository implements ProductRepository {
 
     private ArrayList<Customer> storedCustomers = new ArrayList<Customer>();
     private ArrayList<Product> storedProducts = new ArrayList<Product>();

@@ -10,14 +10,13 @@ import webstore.usecases.UserRepository;
 /**
  * Created by I848075 on 04/08/2015.
  */
-public class RegisterUserTest
-{
+public class RegisterUserTest {
     RegisterUser registerUser;
     UserRepository userRepository;
     FakeReceiver receiver;
 
     @Before
-    public void setUp() throws Exception{
+    public void setUp() throws Exception {
         receiver = new FakeReceiver();
         userRepository = new FakeUserRepository();
         registerUser = new RegisterUser(userRepository, receiver);

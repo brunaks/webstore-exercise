@@ -3,31 +3,26 @@ package webstore.usecases;
 /**
  * Created by I848075 on 03/08/2015.
  */
-public class LoginUseCase
-{
+public class LoginUseCase {
     private final UserRepository userRepository;
     private final Receiver receiver;
     private String email;
     private String password;
 
-    public LoginUseCase(UserRepository userRepository, Receiver receiver)
-    {
+    public LoginUseCase(UserRepository userRepository, Receiver receiver) {
         this.userRepository = userRepository;
         this.receiver = receiver;
     }
 
-    public void setEmail(String email)
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public void login()
-    {
+    public void login() {
         try {
             User user = userRepository.getUserByEmail(this.email);
             testsIfPasswordIsValid(user);
@@ -36,8 +31,7 @@ public class LoginUseCase
         }
     }
 
-    private void testsIfPasswordIsValid(User user)
-    {
+    private void testsIfPasswordIsValid(User user) {
         if (user.getPassword().equals(this.password)) {
             receiver.sendSuccess();
         } else {

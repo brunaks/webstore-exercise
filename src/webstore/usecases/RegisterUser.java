@@ -3,8 +3,7 @@ package webstore.usecases;
 /**
  * Created by I848075 on 04/08/2015.
  */
-public class RegisterUser
-{
+public class RegisterUser {
 
     private UserRepository userRepository;
     private String email;
@@ -14,23 +13,20 @@ public class RegisterUser
         this.userRepository = userRepository;
     }
 
-    public void setEmail(String email)
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public void register()
-    {
+    public void register() {
         User user = new User();
 
         user.setEmail(this.email);
         user.setPassword(this.password);
-        this.userRepository.saveUser(user);
+        this.userRepository.save(user);
     }
 
 }
