@@ -11,16 +11,24 @@ public class EmailTest {
 
     @Test
     public void emailCannotBeBlank() {
-
+        Email email = new Email("");
+        Assert.assertFalse(email.isValid());
     }
 
     @Test
     public void emailMustHaveALocalPart() {
-
+        Email email = new Email("@mail.com");
+        Assert.assertFalse(email.isValid());
     }
 
     @Test
     public void emailMustHaveADomainPart() {
+        Email email = new Email("paulo@");
+        Assert.assertFalse(email.isValid());
+    }
+
+    @Test
+    public void emailMustHaveAnAmpersat() {
 
     }
 }

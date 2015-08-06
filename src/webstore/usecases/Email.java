@@ -11,22 +11,30 @@ class Email {
     public Email(String email) {this.email = email;}
 
     public boolean isValid() {
-        return (this.hasProperFormat() && this.hasALocalPart());
+        return (this.isNotNull() && this.hasProperFormat() && this.hasALocalPart() && this.hasADomainPart());
+    }
+
+    private boolean hasADomainPart() {
+        return (!this.domainPart.isEmpty());
     }
 
     private boolean hasALocalPart() {
         return (!this.localPart.isEmpty());
     }
 
-    private boolean IsNotNull() {
+    private boolean isNotNull() {
         return (this.email != null);
     }
 
     private boolean hasProperFormat() {
         this.email.trim();
         if (hasAmpersat()) {
-            separateEmailIntoLocalAndDomainParts();
-            return true;
+            try {
+                separateEmailIntoLocalAndDomainParts();
+                return true;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return false;
+            }
         }
         else {
             return false;
