@@ -5,16 +5,22 @@ package webstore.usecases;
  */
 public class RegisterUser {
 
+    private Receiver receiver;
     private UserRepository userRepository;
     private String email;
     private String password;
 
     public RegisterUser(UserRepository userRepository, Receiver receiver) {
         this.userRepository = userRepository;
+        this.receiver = receiver;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        if (emailIsValid(email)) {
+            this.email = email;
+        } else {
+            receiver.sendEmailIsInvalid();
+        }
     }
 
     public void setPassword(String password) {
@@ -23,10 +29,15 @@ public class RegisterUser {
 
     public void register() {
         User user = new User();
-
-        user.setEmail(this.email);
-        user.setPassword(this.password);
-        this.userRepository.save(user);
+        if (this.email != null && this.password != null) {
+            user.setEmail(this.email);
+            user.setPassword(this.password);
+            this.userRepository.save(user);
+            receiver.sendUserWasRegisteredSuccessfully();
+        }
     }
 
+    private boolean emailIsValid(String email) {
+        return new Email(email).isValid();
+    }
 }

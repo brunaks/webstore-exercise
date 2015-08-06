@@ -7,6 +7,7 @@ import org.junit.Test;
  * Created by I848075 on 03/08/2015.
  */
 public class FakeUserRepositoryTest {
+
     public UserRepository userRepository = new FakeUserRepository();
 
     @Test(expected = UserRepository.UserDoesNotExist.class)

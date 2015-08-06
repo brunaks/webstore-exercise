@@ -13,7 +13,7 @@ public class CreateCustomerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.customerRepository = new FakeRepository();
+        this.customerRepository = new FakeCustomerRepository();
     }
 
     @Test

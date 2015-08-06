@@ -3,7 +3,7 @@ package webstore.usecases;
 /**
  * Created by Bruna Koch Schmitt on 26/07/2015.
  */
-public interface ProductRepository extends CustomerRepository {
+public interface ProductRepository {
 
     void saveProduct(Product product);
 

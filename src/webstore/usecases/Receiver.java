@@ -9,4 +9,8 @@ public interface Receiver {
     void sendErrorPasswordIsWrong();
 
     void sendSuccess();
+
+    void sendUserWasRegisteredSuccessfully();
+
+    void sendEmailIsInvalid();
 }

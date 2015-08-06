@@ -9,20 +9,21 @@ import org.junit.Test;
  */
 public class AddProductToCartTest {
 
-    private FakeRepository repository = new FakeRepository();
+    private FakeCustomerRepository customerRepository = new FakeCustomerRepository();
+    private FakeProductRepository productRepository = new FakeProductRepository();
     AddProductToCart addToCart;
     ReadCustomersCart readCart;
 
     @Before
     public void setUp() throws Exception {
-        addToCart = new AddProductToCart(this.repository, this.repository);
-        readCart = new ReadCustomersCart(this.repository);
+        addToCart = new AddProductToCart(this.productRepository, this.customerRepository);
+        readCart = new ReadCustomersCart(this.customerRepository);
     }
 
     private void givenCustomer(String customerId) {
         Customer customer = new Customer();
         customer.setId(customerId);
-        repository.saveCustomer(customer);
+        customerRepository.saveCustomer(customer);
     }
 
     private void givenProduct(int units, double price, String productId) {
@@ -30,7 +31,7 @@ public class AddProductToCartTest {
         product.addUnits(units);
         product.setPrice(price);
         product.setId(productId);
-        repository.saveProduct(product);
+        productRepository.saveProduct(product);
     }
 
     @Test
@@ -64,7 +65,7 @@ public class AddProductToCartTest {
         addToCart("customer0001", "product0001", 10);
 
         AddProductToCart addToCart2;
-        addToCart2 = new AddProductToCart(this.repository, this.repository);
+        addToCart2 = new AddProductToCart(this.productRepository, this.customerRepository);
         addToCart2.setCustomer("customer0001");
         addToCart2.setProductAndQuantity("product0002", 15);
         addToCart2.execute();
@@ -81,7 +82,7 @@ public class AddProductToCartTest {
         addToCart("customer0001", "product0001", 10);
 
         AddProductToCart addToCart2;
-        addToCart2 = new AddProductToCart(this.repository, this.repository);
+        addToCart2 = new AddProductToCart(this.productRepository, this.customerRepository);
         addToCart2.setCustomer("customer0002");
         addToCart2.setProductAndQuantity("product0001", 20);
         addToCart2.execute();

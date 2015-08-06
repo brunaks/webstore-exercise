@@ -14,7 +14,7 @@ public class ReadCustomersCartTest {
     @Before
     public void setUp() throws Exception {
         readCart = new ReadCustomersCart(customerRepository);
-        customerRepository = new FakeRepository();
+        customerRepository = new FakeCustomerRepository();
     }
 
     /*@Test

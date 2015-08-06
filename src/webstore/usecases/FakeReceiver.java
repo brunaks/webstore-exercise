@@ -7,6 +7,8 @@ public class FakeReceiver implements Receiver {
     public boolean userDoesNotExist;
     public boolean passwordIsWrong;
     public boolean successful;
+    public boolean userWasRegisteredSuccessfully;
+    public boolean emailIsInvalid;
 
     @Override
     public void sendErrorUserDoesNotExist() {
@@ -21,5 +23,17 @@ public class FakeReceiver implements Receiver {
     @Override
     public void sendSuccess() {
         this.successful = true;
+    }
+
+    @Override
+    public void sendUserWasRegisteredSuccessfully() {
+        this.userWasRegisteredSuccessfully = true;
+        this.emailIsInvalid = false;
+    }
+
+    @Override
+    public void sendEmailIsInvalid() {
+        this.userWasRegisteredSuccessfully = false;
+        this.emailIsInvalid = true;
     }
 }

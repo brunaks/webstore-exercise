@@ -1,6 +1,8 @@
 package webstore.usecases;
 
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import webstore.usecases.FakeReceiver;
 import webstore.usecases.FakeUserRepository;
@@ -27,6 +29,7 @@ public class RegisterUserTest {
         registerUser.setEmail("email@email.com.br");
         registerUser.setPassword("123456");
         registerUser.register();
+        Assert.assertTrue(receiver.userWasRegisteredSuccessfully);
     }
 
 }
