@@ -32,4 +32,12 @@ public class RegisterUserTest {
         Assert.assertTrue(receiver.userWasRegisteredSuccessfully);
     }
 
+    @Test
+    public void emailIsInvalid() {
+        registerUser.setEmail("@email.com.br");
+        registerUser.setPassword("123456");
+        registerUser.register();
+        Assert.assertFalse(receiver.userWasRegisteredSuccessfully);
+    }
+
 }

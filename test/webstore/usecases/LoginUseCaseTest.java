@@ -33,7 +33,6 @@ public class LoginUseCaseTest {
         uc.setEmail(email);
         uc.setPassword("password");
         uc.login();
-
         Assert.assertTrue(((FakeReceiver) receiver).successful);
     }
 

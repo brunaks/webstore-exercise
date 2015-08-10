@@ -8,8 +8,13 @@ public class FakeReceiver implements Receiver {
     public boolean passwordIsWrong;
     public boolean successful;
     public boolean userWasRegisteredSuccessfully;
-    public boolean emailIsInvalid;
-    private boolean emailIsNull;
+    public boolean emailIsValid;
+    public boolean emailIsNull;
+    public boolean emailHasAnAtSymbol;
+    public boolean emailHasOnlyOneAmpersat;
+    public boolean emailHasADomainPart;
+    public boolean emailHasALocalPart;
+    public boolean emailIsBlank;
 
     @Override
     public void sendErrorUserDoesNotExist() {
@@ -29,17 +34,70 @@ public class FakeReceiver implements Receiver {
     @Override
     public void sendUserWasRegisteredSuccessfully() {
         this.userWasRegisteredSuccessfully = true;
-        this.emailIsInvalid = false;
     }
 
     @Override
     public void sendEmailIsInvalid() {
-        this.userWasRegisteredSuccessfully = false;
-        this.emailIsInvalid = true;
+        this.emailIsValid = false;
     }
 
     @Override
-    public boolean sendErrorEmailCannotBeNull() {
-        return this.emailIsNull = true;
+    public void sendErrorEmailCannotBeNull() {
+        this.emailIsNull = true;
+    }
+
+    @Override
+    public void sendErrorEmailMustHaveAnAtSymbol() {
+        this.emailHasAnAtSymbol = false;
+    }
+
+    @Override
+    public void sendErrorEmailMustHaveOnlyOneAmpersat() {
+        this.emailHasOnlyOneAmpersat = false;
+    }
+
+    @Override
+    public void sendErrorEmailMustHaveADomainPart() {
+        this.emailHasADomainPart = false;
+    }
+
+    @Override
+    public void sendErrorEmailMustHaveALocalPart() {
+        this.emailHasALocalPart = false;
+    }
+
+    @Override
+    public void sendSuccessEmailHasAnAtSymbol() {
+        this.emailHasAnAtSymbol = true;
+    }
+
+    @Override
+    public void sendSuccessEmailHasOnlyOneAmpersat() {
+        this.emailHasOnlyOneAmpersat = true;
+    }
+
+    @Override
+    public void sendSuccessEmailHasADomainPart() {
+        this.emailHasADomainPart = true;
+    }
+
+    @Override
+    public void sendSuccessEmailHasALocalPart() {
+        this.emailHasALocalPart = true;
+    }
+
+    @Override
+    public void sendSuccessEmailIsNotBlank() {
+        this.emailIsBlank = false;
+    }
+
+    @Override
+    public void sendErrorEmailCannotBeBlank() {
+        this.emailIsBlank = true;
+    }
+
+    @Override
+    public void sendSuccessEmailIsValid() {
+        this.emailIsValid = true;
     }
 }

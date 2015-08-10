@@ -38,6 +38,8 @@ public class RegisterUser {
     }
 
     private boolean emailIsValid(String email) {
-        return new Email(email, receiver).isValid();
+        Email emailToValidate = new Email(email, receiver);
+        emailToValidate.validate();
+        return emailToValidate.isValid();
     }
 }

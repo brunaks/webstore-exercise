@@ -14,5 +14,27 @@ public interface Receiver {
 
     void sendEmailIsInvalid();
 
-    boolean sendErrorEmailCannotBeNull();
+    void sendErrorEmailCannotBeNull();
+
+    void sendErrorEmailMustHaveAnAtSymbol();
+
+    void sendErrorEmailMustHaveOnlyOneAmpersat();
+
+    void sendErrorEmailMustHaveADomainPart();
+
+    void sendErrorEmailMustHaveALocalPart();
+
+    void sendSuccessEmailHasAnAtSymbol();
+
+    void sendSuccessEmailHasOnlyOneAmpersat();
+
+    void sendSuccessEmailHasADomainPart();
+
+    void sendSuccessEmailHasALocalPart();
+
+    void sendSuccessEmailIsNotBlank();
+
+    void sendErrorEmailCannotBeBlank();
+
+    void sendSuccessEmailIsValid();
 }

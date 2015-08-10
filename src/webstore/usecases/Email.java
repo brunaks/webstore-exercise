@@ -8,47 +8,87 @@ class Email {
     private String email;
     private String localPart;
     private String domainPart;
+    private boolean isValid;
 
     public Email(String email, Receiver receiver) {
         this.receiver = receiver;
         if (email != null) {
             this.email = email;
         } else {
+            this.receiver.sendEmailIsInvalid();
             this.receiver.sendErrorEmailCannotBeNull();
         }
     }
 
-    public boolean isValid() {
-        if (this.hasAmpersat()) {
+    public void validate() {
+        if (this.isNotBlank() && this.hasAmpersat()) {
             separateEmail();
             if (this.hasLocalPart() && this.hasDomainPart() && this.hasOnlyOneAmpersat()) {
-                return true;
+                this.receiver.sendSuccessEmailIsValid();
+                this.isValid = true;
             } else {
-                return false;
+                this.isValid = false;
             }
         }
-        return false;
+    }
+
+    private boolean isNotBlank() {
+        if (!this.email.isEmpty()) {
+            this.receiver.sendSuccessEmailIsNotBlank();
+            return true;
+        } else {
+            this.receiver.sendErrorEmailCannotBeBlank();
+            return false;
+        }
     }
 
     private boolean hasAmpersat() {
-        return (this.email.indexOf('@') != -1);
+        if (this.email.indexOf('@') != -1) {
+            this.receiver.sendSuccessEmailHasAnAtSymbol();
+            return true;
+        } else {
+            this.receiver.sendErrorEmailMustHaveAnAtSymbol();
+            return false;
+        }
     }
 
     private boolean hasOnlyOneAmpersat() {
-        return (this.domainPart.indexOf('@') == -1);
+        if (this.domainPart.indexOf('@') == -1) {
+            this.receiver.sendSuccessEmailHasOnlyOneAmpersat();
+            return true;
+        } else {
+            this.receiver.sendErrorEmailMustHaveOnlyOneAmpersat();
+            return false;
+        }
     }
 
     private boolean hasDomainPart() {
-        return (!this.domainPart.isEmpty());
+        if (!this.domainPart.isEmpty()) {
+            this.receiver.sendSuccessEmailHasADomainPart();
+            return true;
+        } else {
+            this.receiver.sendErrorEmailMustHaveADomainPart();
+            return false;
+        }
     }
 
     private boolean hasLocalPart() {
-        return (!this.localPart.isEmpty());
+        if (!this.localPart.isEmpty()) {
+            this.receiver.sendSuccessEmailHasALocalPart();
+            return true;
+        } else {
+            this.receiver.sendErrorEmailMustHaveALocalPart();
+            return false;
+        }
     }
 
     private void separateEmail() {
         String separatedEmail[] = this.email.split("@", 2);
         this.localPart = separatedEmail[0];
         this.domainPart = separatedEmail[1];
+    }
+
+    public boolean isValid() {
+        return isValid;
     }
 }
