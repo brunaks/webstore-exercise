@@ -10,43 +10,47 @@ import org.junit.Test;
  */
 public class EmailTest {
 
+    Receiver receiver;
+
+    @Before
+    public void setUp() throws Exception {
+        receiver = new FakeReceiver();
+    }
+
     @Test
     public void emailCannotBeBlank() {
-        Email email = new Email("");
+        Email email = new Email("", receiver);
         Assert.assertFalse(email.isValid());
     }
 
-    @Ignore
     @Test
     public void emailMustHaveALocalPart() {
-        Email email = new Email("@mail.com");
+        Email email = new Email("@mail.com", receiver);
         Assert.assertFalse(email.isValid());
     }
 
-    @Ignore
     @Test
     public void emailMustHaveADomainPart() {
-        Email email = new Email("paulo@");
+        Email email = new Email("paulo@", receiver);
         Assert.assertFalse(email.isValid());
     }
 
-    @Ignore
     @Test
     public void emailMustHaveAnAmpersat() {
-        Email email = new Email("paulo.com");
+        Email email = new Email("paulo.com", receiver);
         Assert.assertFalse(email.isValid());
     }
 
-    @Ignore
     @Test
     public void emailMustHaveOnlyOneAmpersat() {
-        Email email = new Email("paulo@com@");
+        Email email = new Email("paulo@com@", receiver);
         Assert.assertFalse(email.isValid());
     }
 
     @Test
-    public void teste() {
-        Email email = new Email("@paulo");
-        boolean isValid = email.isValid();
+    public void emailIsValid() {
+        Email email = new Email("email@email.com", receiver);
+        Assert.assertTrue(email.isValid());
     }
+
 }

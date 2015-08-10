@@ -13,4 +13,6 @@ public interface Receiver {
     void sendUserWasRegisteredSuccessfully();
 
     void sendEmailIsInvalid();
+
+    boolean sendErrorEmailCannotBeNull();
 }
