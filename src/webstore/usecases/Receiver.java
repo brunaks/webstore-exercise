@@ -37,4 +37,8 @@ public interface Receiver {
     void sendErrorEmailCannotBeBlank();
 
     void sendSuccessEmailIsValid();
+
+    void sendSuccessPasswordIsValid();
+
+    void sendErrorPasswordIsInvalid();
 }

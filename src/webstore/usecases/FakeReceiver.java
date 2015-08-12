@@ -15,6 +15,7 @@ public class FakeReceiver implements Receiver {
     public boolean emailHasADomainPart;
     public boolean emailHasALocalPart;
     public boolean emailIsBlank;
+    public boolean passwordIsValid;
 
     @Override
     public void sendErrorUserDoesNotExist() {
@@ -99,5 +100,15 @@ public class FakeReceiver implements Receiver {
     @Override
     public void sendSuccessEmailIsValid() {
         this.emailIsValid = true;
+    }
+
+    @Override
+    public void sendSuccessPasswordIsValid() {
+        this.passwordIsValid = true;
+    }
+
+    @Override
+    public void sendErrorPasswordIsInvalid() {
+        this.passwordIsValid = false;
     }
 }

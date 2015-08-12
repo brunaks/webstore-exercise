@@ -25,7 +25,7 @@ public class LoginUseCaseTest {
     @Test
     public void loginSuccessful() {
         registerUser = new RegisterUser(this.userRepository, this.receiver);
-        registerUser.setEmail("email@yahoo.com.br");
+        registerUser.setEmail(new Email("email@yahoo.com.br", receiver));
         registerUser.setPassword("password");
         registerUser.register();
 
@@ -50,7 +50,7 @@ public class LoginUseCaseTest {
     @Test
     public void loginNotSuccessful_passwordWrong() {
         registerUser = new RegisterUser(this.userRepository, this.receiver);
-        registerUser.setEmail("email@yahoo.com.br");
+        registerUser.setEmail(new Email("email@yahoo.com.br", receiver));
         registerUser.setPassword("password");
         registerUser.register();
 

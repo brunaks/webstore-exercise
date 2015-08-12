@@ -6,14 +6,14 @@ package webstore.usecases;
 public class User {
 
     private String id;
-    private String email;
+    private Email email;
     private String password;
 
     public String getId() {
         return id;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(Email email) {
         this.email = email;
     }
 
@@ -21,7 +21,7 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
+    public Email getEmail() {
         return email;
     }
 

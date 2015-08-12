@@ -1,6 +1,7 @@
 package webstore.usecases;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -8,7 +9,14 @@ import org.junit.Test;
  */
 public class FakeUserRepositoryTest {
 
-    public UserRepository userRepository = new FakeUserRepository();
+    public UserRepository userRepository;
+    public FakeReceiver receiver;
+
+    @Before
+    public void setUp() throws Exception {
+        userRepository = new FakeUserRepository();
+        receiver = new FakeReceiver();
+    }
 
     @Test(expected = UserRepository.UserDoesNotExist.class)
     public void userDoesNotExistThrowsException() {
@@ -17,12 +25,12 @@ public class FakeUserRepositoryTest {
 
     @Test
     public void userExists() {
-        User user = givenUser("email@yahoo.com.br", "password");
+        User user = givenUser(new Email("email@yahoo.com.br", receiver), "password");
         userRepository.save(user);
         Assert.assertTrue(userRepository.hasWithEmail("email@yahoo.com.br"));
     }
 
-    private User givenUser(String email, String password) {
+    private User givenUser(Email email, String password) {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
@@ -36,7 +44,7 @@ public class FakeUserRepositoryTest {
 
     @Test
     public void IdOfNewUserIsNotNull() {
-        User user = givenUser("email@yahoo.com.br", "password");
+        User user = givenUser(new Email("email@yahoo.com.br", receiver), "password");
         User userSaved = userRepository.save(user);
 
         Assert.assertNotNull(userSaved.getId());
@@ -44,7 +52,7 @@ public class FakeUserRepositoryTest {
 
     @Test
     public void afterSavingACustomerModificationsShouldNotBeReflected() {
-        User user = givenUser("email@email.com.br", "password");
+        User user = givenUser(new Email("email@email.com.br", receiver), "password");
         User savedUser = userRepository.save(user);
 
         user.setPassword("password2");

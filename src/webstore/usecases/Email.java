@@ -91,4 +91,8 @@ class Email {
     public boolean isValid() {
         return isValid;
     }
+
+    public String toString() {
+        return this.email;
+    }
 }

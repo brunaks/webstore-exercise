@@ -43,7 +43,7 @@ public class FakeUserRepository implements UserRepository {
     private User findUserWithEmail(String email) {
         User match = null;
         for (int i = 0; i < this.users.size(); i++) {
-            if (this.users.get(i).getEmail().equalsIgnoreCase(email)) {
+            if (this.users.get(i).getEmail().toString().equalsIgnoreCase(email)) {
                 match = this.users.get(i);
             }
         }

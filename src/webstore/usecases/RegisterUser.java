@@ -7,7 +7,7 @@ public class RegisterUser {
 
     private Receiver receiver;
     private UserRepository userRepository;
-    private String email;
+    private Email email;
     private String password;
 
     public RegisterUser(UserRepository userRepository, Receiver receiver) {
@@ -15,9 +15,9 @@ public class RegisterUser {
         this.receiver = receiver;
     }
 
-    public void setEmail(String email) {
-        if (emailIsValid(email)) {
-            this.email = email;
+    public void setEmail(Email email) {
+        if (emailIsValid(email.toString())) {
+            this.email = new Email(email.toString(), receiver);
         } else {
             receiver.sendEmailIsInvalid();
         }
@@ -42,4 +42,6 @@ public class RegisterUser {
         emailToValidate.validate();
         return emailToValidate.isValid();
     }
+
+
 }

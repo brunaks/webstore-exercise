@@ -26,18 +26,27 @@ public class RegisterUserTest {
 
     @Test
     public void registerUserSuccessfully() {
-        registerUser.setEmail("email@email.com.br");
+        registerUser.setEmail(new Email("email@email.com.br", receiver));
         registerUser.setPassword("123456");
         registerUser.register();
-        Assert.assertTrue(receiver.userWasRegisteredSuccessfully);
     }
 
     @Test
     public void emailIsInvalid() {
-        registerUser.setEmail("@email.com.br");
+        registerUser.setEmail(new Email("@email.com.br", receiver));
         registerUser.setPassword("123456");
         registerUser.register();
         Assert.assertFalse(receiver.userWasRegisteredSuccessfully);
+        Assert.assertFalse(receiver.emailIsValid);
     }
 
+    @Ignore
+    @Test
+    public void passwordIsInvalid() {
+        registerUser.setEmail(new Email("email@email.com.br", receiver));
+        registerUser.setPassword("");
+        registerUser.register();
+        Assert.assertFalse(receiver.userWasRegisteredSuccessfully);
+        Assert.assertTrue(receiver.emailIsValid);
+    }
 }
